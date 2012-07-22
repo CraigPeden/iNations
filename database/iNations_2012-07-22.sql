@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.9)
 # Database: iNations
-# Generation Time: 2012-07-22 20:20:29 +0000
+# Generation Time: 2012-07-22 22:28:57 +0000
 # ************************************************************
 
 
@@ -104,8 +104,7 @@ LOCK TABLES `users` WRITE;
 
 INSERT INTO `users` (`id`, `username`, `password`, `nation_id`, `last_visit`)
 VALUES
-	(1,'Admin','4e7afebcfbae000b22c7c85e5560f89a2a0280b4',1,'2012-07-22'),
-	(3,'Craig_Dem','c0b9f0b0e438ef4f7dd6cf1d36df09b4b2a95db5',3,'2012-07-19');
+	(1,'Admin','4e7afebcfbae000b22c7c85e5560f89a2a0280b4',1,'2012-07-22');
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
