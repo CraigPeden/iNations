@@ -1,5 +1,6 @@
 <div class="container-fluid">
 	<?php if ($this->session->flashdata('logout') == TRUE) { ?>
+		<div class="alert alert-info fade in" data-alert="alert">
             <a class="close" data-dismiss="alert" href="#">×</a>
             <span>You have successfully logged out.</span>
         </div> 
@@ -23,7 +24,7 @@
 			<div class="control-group">
 	            <label class="control-label" for="xlInput">Username</label>
 	            <div class="controls">
-		        	<input class="input-xlarge" id="xlInput" name="username" size="30" type="username" placeholder="Username" value="<?php if ($this->session->flashdata('loginfail') == TRUE) { echo $this->session->flashdata('username'); } else { echo ''; }?>">
+		        	<input class="input-xlarge" id="xlInput" name="username" size="30" type="text" placeholder="Username" value="<?php if ($this->session->flashdata('loginfail') == TRUE) { echo $this->session->flashdata('username'); } else { echo ''; }?>">
 	            </div>
 	     	</div>
 	       	<div class="control-group">
