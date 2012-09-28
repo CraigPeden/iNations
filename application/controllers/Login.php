@@ -61,7 +61,6 @@
 				$this->session->set_flashdata('loginfail', 'TRUE');
 				$this->session->set_flashdata('username', $entryusername);
 				redirect('Login');
-				
 			}
 			
 		}

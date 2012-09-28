@@ -40,7 +40,6 @@
 					            <label class="control-label" for="input01">Land: </label>
 					            <div class="controls">
 					              	<input type="text" class="input-xlarge" id="input01" name="buy_land">
-					              	<p class="help-text">Positive value to buy. Negative value to sell.</p>
 					            </div>
 					     	</div>
 						</div>

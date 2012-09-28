@@ -38,7 +38,6 @@
 					            <label class="control-label" for="input01">Technology: </label>
 					            <div class="controls">
 					              	<input type="text" class="input-xlarge" id="input01" name="buy_technology">
-					              	<p class="help-text">Positive value to buy. Negative value to sell.</p>
 					            </div>
 					     	</div>
 						</div>

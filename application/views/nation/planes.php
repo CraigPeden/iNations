@@ -32,7 +32,7 @@
 					            <label class="control-label" for="input01">Planes: </label>
 					            <div class="controls">
 					              	<input type="text" class="input-xlarge" id="input01" name="buy_planes">
-					              	<p class="help-text">Positive value to assemble. Negative value to decommission.</p>
+					              	<p class="help-block">Positive value to assemble. Negative value to decommission.</p>
 					            </div>
 					     	</div>
 						</div>

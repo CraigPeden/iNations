@@ -1,0 +1,25 @@
+/*////////////////////
+// MY STUFF			//
+////////////////////*/
+
+		.clearmargin {
+			margin: 0;
+		}
+
+		.brand_logo {
+			padding-left: 6px !important;
+		}
+        
+        .brand_img {
+            vertical-align: top !important;
+        }
+
+		.team_colour {
+			border: black 1px solid;
+		}
+        
+        .margin_topup {
+            margin-top: 20px;
+        }
+
+/* END OF MY STUFF */

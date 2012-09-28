@@ -14,11 +14,12 @@
     <![endif]-->
 
     <!-- Le Styles -->
+    <link href="/css/iNations.css" rel="stylesheet">
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/bootstrap-responsive.css" rel="stylesheet">
     <style>
-    	.margin_topup {
-    		padding-top: 80px;
+    	body {
+    		padding-top: 40px;
     	}
     </style>
 </head>
@@ -32,7 +33,7 @@
             		<span class="icon-bar"></span>
             		<span class="icon-bar"></span>
           		</a>
-          		<a class="brand" href="<?php echo base_url();?>" style="height:20px; width:20px;"><img src="/img/globe_bw_40x40.png" height="18" width="18" /></a>
+          		<a class="brand" href="<?php echo base_url();?>" style="height:20px; width:20px;"><img class="brand_img" src="/img/globe_bw_40x40.png" height="18" width="18" /></a>
           		<a class="brand brand_logo" href="<?php echo base_url();?>">iNations</a>
           		<div class="nav-collapse">
             		<ul class="nav">

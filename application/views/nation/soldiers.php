@@ -36,7 +36,7 @@
 					            <label class="control-label" for="input01">Soldiers: </label>
 					            <div class="controls">
 					              	<input type="text" class="input-xlarge" id="input01" name="buy_soldiers">
-					              	<p class="help-text">Positive value to train. Negative value to decomission.</p>
+					              	<p class="help-block">Positive value to train. Negative value to decomission.</p>
 					            </div>
 					     	</div>
 						</div>

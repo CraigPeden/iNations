@@ -1,6 +1,5 @@
 <div class="container-fluid">
 	<?php if ($this->session->flashdata('logout') == TRUE) { ?>
-		<div class="alert alert-info fade in" data-alert="alert">
             <a class="close" data-dismiss="alert" href="#">×</a>
             <span>You have successfully logged out.</span>
         </div> 
