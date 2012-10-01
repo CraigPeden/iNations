@@ -220,6 +220,11 @@
 			}
 			
 		}
+        
+        function check_wonder($nation_id, $wonder)
+        {
+            /* TO DO */
+        }
 		
 	}
 	

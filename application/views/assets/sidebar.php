@@ -12,12 +12,14 @@
 				       	<li class="divider"></li>
 				       	<li<?php if(uri_string() == "inations/improvements") { echo ' class="active" '; }?>><a href="<?php echo site_url("inations/improvements");?>"><i class="icon-plus"></i> Buy Improvements</a></li>
 				       	<li<?php if(uri_string() == "inations/wonders") { echo ' class="active" '; }?>><a href="<?php echo site_url("inations/wonders");?>"><i class="icon-star"></i> Buy Wonders</a></li>
-				      	<li class="nav-header">Military Purchasing</li>
+
+                        <li class="nav-header">Military Purchasing</li>
 				       	<li<?php if(uri_string() == "inations/soldiers") { echo ' class="active" '; }?>><a href="<?php echo site_url("inations/soldiers");?>"><i class="icon-screenshot"></i> Train Soldiers</a></li>
 				       	<li<?php if(uri_string() == "inations/tanks") { echo ' class="active" '; }?>><a href="<?php echo site_url("inations/tanks");?>"><i class="icon-magnet"></i> Assemble Tanks</a></li>
 				       	<li<?php if(uri_string() == "inations/planes") { echo ' class="active" '; }?>><a href="<?php echo site_url("inations/planes");?>"><i class="icon-plane"></i> Assemble Planes</a></li>
-				       	<li<?php if(uri_string() == "inations/nuclear_weapons") { echo ' class="active" '; }?>><p href="<?php echo site_url("inations/nuclear_weapons");?>"><i class="icon-fire"></i> Nuclear Weapons</p></li>
-				       	<li class="nav-header">Nation Income</li>
+				       	<li<?php if(uri_string() == "inations/nuclear_weapons") { echo ' class="active" '; }?>><a href="<?php echo site_url("inations/nuclear_weapons");?>"><i class="icon-fire"></i> Nuclear Weapons</a></li>
+            
+                        <li class="nav-header">Nation Income</li>
 				       	<li<?php if(uri_string() == "inations/taxes") { echo ' class="active" '; }?>><a href="<?php echo site_url("inations/taxes");?>"><i class="icon-gift"></i> Collect Taxes</a></li>
 				       	<li<?php if(uri_string() == "inations/bills") { echo ' class="active" '; }?>><a href="<?php echo site_url("inations/bills");?>"><i class="icon-list-alt"></i> Pay Bills</a></li>
 				       	<li class="nav-header">Server Time</li>

@@ -1,26 +1,26 @@
 <div class="container-fluid">
-	<?php if ($this->session->flashdata('logout') == TRUE) { ?>
-		<div class="alert alert-info fade in" data-alert="alert">
-            <a class="close" data-dismiss="alert" href="#">×</a>
-            <span>You have successfully logged out.</span>
-        </div> 
-    <?php } ?>
-    <?php if ($this->session->flashdata('loginfail') == TRUE) { ?>
-		<div class="alert alert-error fade in" data-alert="alert">
-            <a class="close" data-dismiss="alert" href="#">×</a>
-            <span>Login Failed</span>
-        </div> 
-    <?php } ?>
-    <?php if ($this->session->flashdata('success') != '') { ?>
-		<div class="alert alert-success fade in" data-alert="alert">
-			<a class="close" data-dismiss="alert" href="#">×</a>
-			<span><?php echo $this->session->flashdata('success'); ?></span>
-		</div>
-    <?php } ?>
-		
 	<form method="post" class="form-horizontal" action="<?php echo site_url('Login/checkpassword'); ?>">
 		<legend>Login</legend>
 		<fieldset>
+            <?php if ($this->session->flashdata('loginfail') == TRUE) { ?>
+                <div class="alert alert-error fade in" data-alert="alert">
+                <a class="close" data-dismiss="alert" href="#">×</a>
+                <span>Login Failed</span>
+            </div>
+            <?php } ?>
+            <?php if ($this->session->flashdata('logout') == TRUE) { ?>
+                <div class="alert alert-info fade in" data-alert="alert">
+                <a class="close" data-dismiss="alert" href="#">×</a>
+                <span>You have successfully logged out.</span>
+                </div>
+            <?php } ?>
+            <?php if ($this->session->flashdata('success') != '') { ?>
+                <div class="alert alert-success fade in" data-alert="alert">
+                <a class="close" data-dismiss="alert" href="#">×</a>
+                <span><?php echo $this->session->flashdata('success'); ?></span>
+                </div>
+            <?php } ?>
+
 			<div class="control-group">
 	            <label class="control-label" for="xlInput">Username</label>
 	            <div class="controls">

@@ -25,6 +25,13 @@
 			$this->load->view('nation/main', array('nation_info' => $this->Nation_model->get_nation_by_id($this->session->userdata('nation_id'))));
 			$this->load->view('assets/footer');
 		}
+        
+        function about()
+        {
+            $this->load->view('assets/header', array('user' => $this->User_model->get_user_by_id($this->session->userdata('user_id'))));
+			$this->load->view('nation/main', array('nation_info' => $this->Nation_model->get_nation_by_id($this->session->userdata('nation_id'))));
+			$this->load->view('assets/footer');
+        }
 		
 		function infrastructure()
 		{
@@ -73,6 +80,30 @@
 			$this->load->view('nation/planes', array('nation_info' => $this->Nation_model->get_nation_by_id($this->session->userdata('nation_id'))));
 			$this->load->view('assets/footer');
 		}
+        
+        // Nuclear Weapoons
+        
+        function nuclear_weapons()
+        {
+            $this->load->view('assets/header', array('user' => $this->User_model->get_user_by_id($this->session->userdata('user_id'))));
+			$this->load->view('assets/sidebar');
+			$this->load->view('nation/nuclear_weapons', array('nation_info' => $this->Nation_model->get_nation_by_id($this->session->userdata('nation_id'))));
+			$this->load->view('assets/footer');
+        }
+        
+        function buy_nuclear_weapons()
+        {
+            if (($this->Nation_model->check_wonder($this->session->userdata('nation_id'), 'Manhatten Project')) == "TRUE") {
+                $this->Nation_model->purchase_nuclear_weapons();
+            }
+            else {
+                $this->session->set_flashdata("error", 'Requires Manhatten Project');
+                redirect('inations');
+            }
+                
+        }
+        
+        // Taxes
 		
 		function taxes()
 		{
@@ -81,7 +112,15 @@
 			$this->load->view('nation/taxes', array('nation_info' => $this->Nation_model->get_nation_by_id($this->session->userdata('nation_id'))));
 			$this->load->view('assets/footer');
 		}
+        
+		function collect_taxes()
+		{
+			$this->Nation_model->collect_taxes();
+			redirect('inations');
+		}
 		
+        // Bills
+        
 		function bills()
 		{
 			$this->load->view('assets/header', array('user' => $this->User_model->get_user_by_id($this->session->userdata('user_id'))));
@@ -89,6 +128,14 @@
 			$this->load->view('nation/bills', array('nation_info' => $this->Nation_model->get_nation_by_id($this->session->userdata('nation_id'))));
 			$this->load->view('assets/footer');
 		}
+        
+		function pay_bills()
+		{
+			$this->Nation_model->pay_bills();
+			redirect('inations');
+		}
+        
+        // Wonders
 		
 		function wonders()
 		{
@@ -106,18 +153,6 @@
 			$this->load->view('assets/sidebar');
 			$this->load->view('nation/wonder', array('wonder_info' => $this->Nation_model->get_wonder_by_id($wonder_id)));
 			$this->load->view('assets/footer');
-		}
-		
-		function collect_taxes()
-		{
-			$this->Nation_model->collect_taxes();
-			redirect('inations');
-		}
-		
-		function pay_bills()
-		{
-			$this->Nation_model->pay_bills();
-			redirect('inations');
 		}
 		
 		function buy_infrastructure()

@@ -16,12 +16,13 @@
     <!-- Le Styles -->
     <link href="/css/iNations.css" rel="stylesheet">
     <link href="/css/bootstrap.css" rel="stylesheet">
-    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
     <style>
     	body {
     		padding-top: 40px;
     	}
     </style>
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+    
 </head>
 
 <body>
@@ -37,9 +38,13 @@
           		<a class="brand brand_logo" href="<?php echo base_url();?>">iNations</a>
           		<div class="nav-collapse">
             		<ul class="nav">
-              			<li class="active"><a href="#">Home</a></li>
-              			<li><a href="#about">About</a></li>
-              			<li><a href="#contact">Contact</a></li>
+                        <li <?php if (uri_string() == "") {echo 'class="active"';} ?>><a href="<?php echo site_url(''); ?>"><i class="icon-ok icon"></i> Home</a></li>
+                        <li class="divider-vertical"></li>
+                        <li <?php if (uri_string() == "iNations/about") {echo 'class="active"';} ?>><a href="<?php echo site_url('iNations/about'); ?>"><i class="icon-inbox icon"></i> About</a></li>
+                        <li class="divider-vertical"></li>
+                        <li <?php if (uri_string() == "iNations/changelog") {echo 'class="active"';} ?>><a href="#<?php //echo site_url('iNations/changelog'); ?>"><i class="icon-star-empty icon"></i> Changelog</a></li>
+                        <li class="divider-vertical"></li>
+                        <li <?php if (uri_string() == "iNations/contact") {echo 'class="active"';} ?>><a href="#<?php //echo site_url('iNations/contact'); ?>"><i class="icon-star-empty icon"></i> Contact</a></li>
             		</ul>
             		<?php if (isset($user)) { ?>
 		       			<p class="navbar-text pull-right">Logged in as <a href="<?php echo site_url(); ?>/login/logout"><?php echo $user->username; ?></a></p>
