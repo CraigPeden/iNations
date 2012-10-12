@@ -221,6 +221,42 @@
 			
 		}
         
+        function get_alliance_info($alliance)
+        {
+	        return $this->db->get_where('nation_info', array('nation_alliance_affiliation' => $alliance));
+        }
+        
+        function get_statistic_totals($alliance)
+        {
+        	$query = $this->db->get_where('nation_info', array('nation_alliance_affiliation' => $alliance));
+        	$alliance_infrastructure = 0;
+        	$alliance_technology = 0;
+        	$alliance_land = 0;
+        	$alliance_citizens = 0;
+        	$alliance_soldiers = 0;
+        	$alliance_planes = 0;
+        	$alliance_tanks = 0;
+        	$alliance_nuclear_weapons = 0;
+        	
+	        foreach($query->result() as $row)
+	        {
+		    	$alliance_infrastructure = $alliance_infrastructure + $row->nation_infrastructure;
+		    	$alliance_technology = $alliance_technology + $row->nation_technology; 
+		    	$alliance_land = $alliance_technology + $row->nation_land;
+		    	$alliance_citizens = $alliance_citizens + $row->nation_citizens;
+		    	
+		    	$alliance_soldiers = $alliance_soldiers + $row->nation_soldiers;
+		    	$alliance_planes = $alliance_planes + $row->nation_planes;
+		    	$alliance_tanks = $alliance_tanks + $row->nation_tanks;
+		    	$alliance_nuclear_weapons = $alliance_nuclear_weapons + $row->nation_nuclear_weapons;
+	        }
+	        
+	        $alliance_stats = array('alliance' => $alliance, 'infrastructure' => $alliance_infrastructure, 'technology' => $alliance_technology, 'land' => $alliance_land, 'citizens' => $alliance_citizens, 'soldiers' => $alliance_soldiers, 'planes' => $alliance_planes, 'tanks' => $alliance_tanks, 'nuclear_weapons' => $alliance_nuclear_weapons);
+	        
+	        return $alliance_stats;
+        }
+        
+        
         function check_wonder($nation_id, $wonder)
         {
             /* TO DO */

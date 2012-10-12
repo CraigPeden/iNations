@@ -29,7 +29,7 @@
         function about()
         {
             $this->load->view('assets/header', array('user' => $this->User_model->get_user_by_id($this->session->userdata('user_id'))));
-			$this->load->view('nation/main', array('nation_info' => $this->Nation_model->get_nation_by_id($this->session->userdata('nation_id'))));
+			$this->load->view('masthead/about');
 			$this->load->view('assets/footer');
         }
 		
@@ -267,6 +267,42 @@
 					case "Links": echo "You selected Links"; 
 						break;
 				}*/
+		}
+		
+		/* Statistics */
+		
+		function alliance_statistics_select()
+		{
+			$this->load->view('assets/header', array('user' => $this->User_model->get_user_by_id($this->session->userdata('user_id'))));
+			$this->load->view('assets/sidebar');
+			$this->load->view('alliance/statistics_select', array('nation_info' => $this->Nation_model->get_nation_by_id($this->session->userdata('nation_id'))));
+			$this->load->view('assets/footer');
+		}
+		
+		function alliance_statistics()
+		{
+			$alliance = $this->input->post('alliance');
+			$this->load->view('assets/header', array('user' => $this->User_model->get_user_by_id($this->session->userdata('user_id'))));
+			$this->load->view('assets/sidebar');
+			$this->load->view('alliance/statistics_alliance', array('nation_info' => $this->Nation_model->get_nation_by_id($this->session->userdata('nation_id')), 'alliance_info' => $this->Nation_model->get_alliance_info($alliance)));
+			$this->load->view('assets/footer');
+		}
+		
+		function alliance_statistics_totals_select()
+		{
+			$this->load->view('assets/header', array('user' => $this->User_model->get_user_by_id($this->session->userdata('user_id'))));
+			$this->load->view('assets/sidebar');
+			$this->load->view('alliance/statistics_alliance_totals_select', array('nation_info' => $this->Nation_model->get_nation_by_id($this->session->userdata('nation_id'))));
+			$this->load->view('assets/footer');
+		}
+		
+		function alliance_statistics_totals()
+		{
+			$alliance = $this->input->post('alliance');
+			$this->load->view('assets/header', array('user' => $this->User_model->get_user_by_id($this->session->userdata('user_id'))));
+			$this->load->view('assets/sidebar');
+			$this->load->view('alliance/alliance_totals', array('nation_info' => $this->Nation_model->get_nation_by_id($this->session->userdata('nation_id')), 'alliance_stats' => $this->Nation_model->get_statistic_totals($alliance)));
+			$this->load->view('assets/footer');
 		}
 	}
 	

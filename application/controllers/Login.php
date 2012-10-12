@@ -12,6 +12,14 @@
 		{
 			$this->session->keep_flashdata('current_url');
 			$this->load->view('assets/header');
+			$this->load->view('masthead/masthead');
+			$this->load->view('assets/footer');
+		}
+		
+		public function login()
+		{
+			$this->session->keep_flashdata('current_url');
+			$this->load->view('assets/header');
 			$this->load->view('auth/login');
 			$this->load->view('assets/footer');
 		}

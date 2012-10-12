@@ -1,10 +1,9 @@
 <style type="text/css">
+
+	body {
+		/*margin-top: 40px;*/
+	}
       /* Override some defaults */
-      html, body {
-        background-color: #000;
-        background-image: url(../../images/bkgd.png);
-        background-repeat: no-repeat;
-      }
       .container > footer p {
         text-align: center; /* center align it with the container */
       }
@@ -14,7 +13,6 @@
 
       /* The white background content wrapper */
       .content {
-        background-color: #fff;
         padding: 20px;
         margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
         -webkit-border-radius: 0 0 6px 6px;
@@ -25,54 +23,24 @@
                 box-shadow: 0 1px 2px rgba(0,0,0,.15);
       }
 
-      /* Page header tweaks */
-      .page-header {
-        background-color: #f5f5f5;
-        padding: 20px 20px 10px;
-        margin: -20px -20px 20px;
-      }
-
       /* Give a quick and non-cross-browser friendly divider */
       .content .span3 {
         margin-left: 0;
         padding-left: 19px;
         border-left: 1px solid #eee;
       }
-      
-	    .navbar {
-			margin-bottom: 18px;
-		}
-		
-		.navbar .nav .active > a, .navbar .nav .active > a:hover {
-	  		border-bottom: 2px gray double;
-	  		background: none !important;
-		}
-		
-		.navbar-inner {
-			background: none !important;
-		}
-
 </style>
 
 <div class="container">
-	<div class="content" style="min-height:500px;">
+	<div class="content">
 		<div class="page-header">
-			<h1>Stocker <small>Retail Support Program</small></h1>
+			<h1>iNations <small>Nation Simulator</small></h1>
 		</div>
 		<div class="row-fluid">
 	  		<div class="span7">
-	    		<p>Stocker is a program that can handle multiple areas required by companies in the retail sector.</p>
-	    		<h4>Features include</h4>
-	    		<dl>
-			        <dt>Transactions</dt>
-			        <dd>Facilitates the selling of goods.</dd>
-			        <dt>Inventory</dt>
-			        <dd>Allows items to be stored and then sold.</dd>
-			        <dt>Loyalty</dt>
-			        <dd>Allows Loyalty members to be added and their number of commerces tracked.</dd>
-			        <dt>Offer Presentation</dt>
-			        <dd>A small carousel of five random items displaying current available products.</dd>
-			   	</dl>
+	    		<p>iNations is -at current- a direct port of Cybernations to allow me a chance to learn and use HTML/CSS/JS/PHP/MYSQL through the creation of a game. Eventually, I hope to extend and add to have even more features and better gameplay, but for now making a clone is a task enough in itself.</p>
+	    		<p>As I'm going along I'll probably add little tweaks to the interface I think are improvements, such as being able to change nation information from the mains screen as opposed to having to load a new page.</p>
+	    		<p>This isn't meant to be public, or commercial or anything, just an exercise in programming.</p>
 	  		</div>
 	  		<div class="span3">
 	  			<h4>Dev Info</h4>

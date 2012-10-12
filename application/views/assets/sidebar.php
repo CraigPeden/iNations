@@ -22,6 +22,9 @@
                         <li class="nav-header">Nation Income</li>
 				       	<li<?php if(uri_string() == "inations/taxes") { echo ' class="active" '; }?>><a href="<?php echo site_url("inations/taxes");?>"><i class="icon-gift"></i> Collect Taxes</a></li>
 				       	<li<?php if(uri_string() == "inations/bills") { echo ' class="active" '; }?>><a href="<?php echo site_url("inations/bills");?>"><i class="icon-list-alt"></i> Pay Bills</a></li>
+				       	<li class="nav-header">Alliance Statistics</li>
+				       	<li<?php if(uri_string() == "inations/alliance_statistics_select") { echo ' class="active" '; }?>><a href="<?php echo site_url("inations/alliance_statistics_select");?>"><i class="icon-gift"></i> Alliance Nations</a></li>
+				       	<li<?php if(uri_string() == "inations/alliance_statistics_totals_select") { echo ' class="active" '; }?>><a href="<?php echo site_url("inations/alliance_statistics_totals_select");?>"><i class="icon-gift"></i> Alliance Combined Statistics</a></li>
 				       	<li class="nav-header">Server Time</li>
         				<li><?php echo unix_to_human(now(), FALSE, 'eu'); ?></li>
         			</ul>
