@@ -11,23 +11,8 @@
 		public function index()
 		{
 			$this->session->keep_flashdata('current_url');
-			$this->load->view('assets/header');
+			$this->load->view('assets/masthead_header');
 			$this->load->view('masthead/masthead');
-			$this->load->view('assets/footer');
-		}
-		
-		public function login()
-		{
-			$this->session->keep_flashdata('current_url');
-			$this->load->view('assets/header');
-			$this->load->view('auth/login');
-			$this->load->view('assets/footer');
-		}
-		
-		public function sign_up()
-		{
-			$this->load->view('assets/header');
-			$this->load->view('auth/sign_up');
 			$this->load->view('assets/footer');
 		}
 		
@@ -46,8 +31,8 @@
 			}
 			else
 			{
-				$this->session->set_flashdata('errormsg', 'Entered passwords do not match');
-				redirect('Login/sign_up');
+				$this->session->set_flashdata('errormsg', 'Signup details incorrect');
+				redirect('Login');
 			}
 			
 			
@@ -66,7 +51,7 @@
 			} 
 			else 
 			{	
-				$this->session->set_flashdata('loginfail', 'TRUE');
+				$this->session->set_flashdata('errormsg', 'Login details incorrect');
 				$this->session->set_flashdata('username', $entryusername);
 				redirect('Login');
 			}
