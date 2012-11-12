@@ -72,11 +72,22 @@
 		            		<td colspan="3">Total Bills:</td>
 		            		<td>£<?php echo ($nation_info->nation_infrastructure * $nation_info->nation_infrastructure_upkeep) + ($nation_info->nation_tanks * 2) + ($nation_info->nation_planes * 2.5) + ($nation_info->nation_nuclear_weapons * 250000)?></td>
 		           		</tr>
+		           		<tr>
+		            		<td colspan="3">Total Funds After Bills:</td>
+		            		<td>£<?php echo $nation_info->nation_funds - (($nation_info->nation_infrastructure * $nation_info->nation_infrastructure_upkeep) + ($nation_info->nation_tanks * 2) + ($nation_info->nation_planes * 2.5) + ($nation_info->nation_nuclear_weapons * 250000)); ?></td>
+		           		</tr>
 		        	</tbody>
 		      	</table>
-		      		<div class="modal-footer">      		
-			      		<a href="<?php echo site_url("inations/pay_bills");?>" class="btn btn-primary">Pay Bills</a>
-				      	<a href="<?php echo site_url(); ?>" class="btn" data-dismiss="modal">Close</a>
+		      		<div class="modal-footer">
+		      			<?php if ($nation_info->nation_paid_bills == TRUE) 
+		      				{ ?>
+		      					<span class="pull-left alert alert-error">You can only play bills once a day.</span>
+		      					<a href="#" class="btn btn-primary" disabled>Pay Bills</a>
+		      			<?php }
+		      				else { ?>
+			      		<a href="<?php echo site_url("inations/pay_bills");?>" class="btn btn-primary">Pay Bills</a> 
+			      		<?php } ?>
+				      		<a href="<?php echo site_url(); ?>" class="btn" data-dismiss="modal">Close</a>
 			   		</div>
 			</div>
 		</div>

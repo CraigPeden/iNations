@@ -34,8 +34,15 @@
 		           		</tr>
 		        	</tbody>
 		      	</table>
-		      		<div class="modal-footer">      		
-			      		<a href="<?php echo site_url("inations/collect_taxes");?>" class="btn btn-primary">Collect Taxes</a>
+		      		<div class="modal-footer">
+		      			<?php if ($nation_info->nation_collected_taxes == TRUE) 
+		      			{ ?>
+			      			<span class="alert alert-error pull-left">You can only collect taxes once a day.</span><a href="#" class="btn btn-primary" disabled>Collect Taxes</a>
+		      			<?php }     		
+		      			
+		      			else { ?>
+			      			<a href="<?php echo site_url("inations/collect_taxes"); ?> " class="btn btn-primary">Collect Taxes</a>'
+			      		<?php } ?>
 				      	<a href="<?php echo site_url(); ?>" class="btn" data-dismiss="modal">Close</a>
 			   		</div>
 			</div>

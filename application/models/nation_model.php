@@ -63,6 +63,13 @@
 			$this->db->update('nation_info', $data);
 		}
 		
+		function change_resources($resource1, $resource2)
+		{
+			$data = array('nation_resource_one' => $resource1, 'nation_resource_two' => $resource2);
+			$this->db->where('id', $this->session->userdata('nation_id'));
+			$this->db->update('nation_info', $data);
+		}
+		
 		function purchase_infrastructure($cost, $infrastructure_purchase)
 		{
 			$nation_info = $this->db->get_where('nation_info', array('id' => $this->session->userdata('nation_id')))->row();
@@ -105,6 +112,24 @@
 				$new_land_level = $nation_info->nation_land + $land_purchase;
 				$new_funds_level = $nation_info->nation_funds - $cost;
 				$data = array('nation_land' => $new_land_level, 'nation_funds' => $new_funds_level);
+				$this->db->where('id', $this->session->userdata('nation_id'));
+				$this->db->update('nation_info', $data);
+			}
+			else {
+				$this->session->set_flashdata('errormsg', 'Not enough funds');
+			}
+			
+		}
+		
+		function purchase_nuclear_weapons()
+		{
+			$nation_info = $this->db->get_where('nation_info', array('id' => $this->session->userdata('nation_id')))->row();
+			$cost = 250000;
+			if($cost <= $nation_info->nation_funds)
+			{
+				$new_nuclear_weapons_level = $nation_info->nation_nuclear_weapons + 1;
+				$new_funds_level = $nation_info->nation_funds - $cost;
+				$data = array('nation_nuclear_weapons' => $new_nuclear_weapons_level, 'nation_funds' => $new_funds_level);
 				$this->db->where('id', $this->session->userdata('nation_id'));
 				$this->db->update('nation_info', $data);
 			}
@@ -185,7 +210,7 @@
 			$old_nation_funds = $nation_info->nation_funds;
 			$new_nation_funds = $old_nation_funds + $taxes;
 			
-			$data = array('nation_funds' => $new_nation_funds);
+			$data = array('nation_funds' => $new_nation_funds, 'nation_collected_taxes' => TRUE, 'nation_tax_collection_date' => date('Y-m-d H:i:s') );
 			$this->db->where('id', $this->session->userdata('nation_id'));
 			$this->db->update('nation_info', $data);
 		}
@@ -210,7 +235,7 @@
 			if($bills < $old_nation_funds) {
 				$new_nation_funds = $old_nation_funds - $bills;
 				
-				$data = array('nation_funds' => $new_nation_funds);
+				$data = array('nation_funds' => $new_nation_funds, 'nation_paid_bills' => True, 'nation_bill_payment_date' => date('Y-m-d H:i:s'));
 				$this->db->where('id', $this->session->userdata('nation_id'));
 				$this->db->update('nation_info', $data);
 			}
@@ -237,6 +262,8 @@
         	$alliance_planes = 0;
         	$alliance_tanks = 0;
         	$alliance_nuclear_weapons = 0;
+        	$alliance_nations = 0;
+        	
         	
 	        foreach($query->result() as $row)
 	        {
@@ -249,6 +276,7 @@
 		    	$alliance_planes = $alliance_planes + $row->nation_planes;
 		    	$alliance_tanks = $alliance_tanks + $row->nation_tanks;
 		    	$alliance_nuclear_weapons = $alliance_nuclear_weapons + $row->nation_nuclear_weapons;
+		    	$alliance_nations = $alliance_nations++; //This can be optimized via a helper function.
 	        }
 	        
 	        $alliance_stats = array('alliance' => $alliance, 'infrastructure' => $alliance_infrastructure, 'technology' => $alliance_technology, 'land' => $alliance_land, 'citizens' => $alliance_citizens, 'soldiers' => $alliance_soldiers, 'planes' => $alliance_planes, 'tanks' => $alliance_tanks, 'nuclear_weapons' => $alliance_nuclear_weapons);
@@ -261,7 +289,39 @@
         {
             /* TO DO */
         }
-		
+        
+        function paid_bills() 
+        {
+	       if ($this->db->get_where('nation_info', array('id' => $this->session->userdata('nation_id')))->row()->nation_paid_bills == TRUE) 
+	       		{ 
+	       			$nation_check->bills = TRUE;
+	       			return $nation_check;   
+	       		}
+	       	else
+	       		{
+		       		return FALSE;
+	       		}       	 
+        }
+        
+        function collected_taxes() 
+        {
+	       if ($this->db->get_where('nation_info', array('id' => $this->session->userdata('nation_id')))->row()->nation_collected_taxes == TRUE) 
+	       		{ 
+	       			$nation_check->taxes = TRUE;
+	       			return $nation_check;   
+	       		}
+	       	else
+	       		{
+		       		return FALSE;
+	       		}       	 
+        }
+        
+        function activity()
+        {
+	    	$last_collect = $this->db->get_where('nation_info', array('id' => $this->session->userdata('nation_id')))->row()->nation_collected_taxes_date; 	
+	    	$nation_check->activity = $this->nation_model->timeSince($last_collect);
+	    	return $nation_check;
+	    }    		
 	}
 	
 /* End of file user_model.php */

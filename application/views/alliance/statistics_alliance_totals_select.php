@@ -3,7 +3,7 @@
 		<legend>Search Alliance</legend>
 		<fieldset>
 			<div class="control-group">
-	            <label class="control-label" for="xlInput">Username</label>
+	            <label class="control-label" for="xlInput">Alliance</label>
 	            <div class="controls">
 		        	<input class="input-xlarge" id="xlInput" name="alliance" size="30" type="text" placeholder="Alliance">
 	            </div>

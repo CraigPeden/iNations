@@ -1,11 +1,3 @@
-	<style>
-		.team_colour {
-			border: black 1px solid;
-		}
-	</style>
-	
-	<!--<section class="container">
-		<div class="row">-->
 			<div class="span10">
 				<?php if ($this->session->flashdata('errormsg') != '') { ?>
 					<div class="alert alert-error fade in" data-alert="alert">

@@ -11,12 +11,12 @@
 	<div class="hero-unit">
 		<div class="row-fluid">
 			<div class="span4">
-				<img src="/img/globe-bw.png" width="300px" height="300px"/>
+				<img src="../../iNations/img/globe-bw.png" width="300px" height="300px"/>
 			</div>
 			<div class="span8">
 				<h1>iNations</h1>
 				<ul class="nav nav-tabs" id="#myTab">
-					  <li><a href="#login" data-toggle="tab">Login</a></li>
+					  <li class="active" ><a href="#login" data-toggle="tab">Login</a></li>
 					  <li><a href="#signup" data-toggle="tab">Signup</a></li>
 				</ul>
 				<div class="tab-content">
@@ -44,7 +44,7 @@
 					            <?php if ($this->session->flashdata('errormsg') != '') { ?>
 									<div class="alert alert-error fade in" data-alert="alert">
 										<a class="close" data-dismiss="alert" href="#">×</a>
-										<p><?php echo $this->session->flashdata('errormsg'); ?></p>
+										<span><?php echo $this->session->flashdata('errormsg'); ?></span>
 									</div>
 								<?php } ?>
 					
@@ -73,7 +73,7 @@
 						        <div class="control-group">
 					            	<label class="control-label" for="xlInput">Username</label>
 					            	<div class="controls">
-						            	 <input class="input-xlarge" id="xlInput" name="newuser" size="30" type="text" placeholder="Username">
+						            	 <input class="input-xlarge" id="xlInput" name="newuser" size="30" type="text" placeholder="Username" maxlength="20">
 					            	</div>
 					          	</div><!-- /clearfix -->
 					          	<div class="control-group">
@@ -94,7 +94,7 @@
 						       	<div class="control-group">
 					            	<label class="control-label" for="xlInput">Nation Name</label>
 					            	<div class="controls">
-						            	 <input class="input-xlarge" id="xlInput" name="newnation" size="30" type="text" placeholder="Nation Name">
+						            	 <input class="input-xlarge" id="xlInput" name="newnation" size="30" type="text" placeholder="Nation Name" maxlength="20">
 					            	</div>
 					          	</div><!-- /clearfix -->         
 						        <div class="form-actions">

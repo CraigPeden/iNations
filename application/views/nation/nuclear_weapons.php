@@ -29,8 +29,12 @@
 		        	</tbody>
 		      	</table>
 			    	
-                <div class="modal-footer">
-                    <a href="<?php echo site_url('/iNations/purchase_nuclear_weapon')?>" class="btn btn-primary">Develop Nuclear Weapon</button>
+                <div class="modal-footer"><?php if ($nation_info->nation_developed_nuclear_weapon == TRUE) 
+		      			{ ?>
+			      			<span class="alert alert-error pull-left">You can only develop one nuclear weapon a day.</span><a href="#" class="btn btn-primary" disabled>Develop Nuclear Weapon</a>
+			      		<?php } else { ?>
+			      			<a href="<?php echo site_url('/iNations/purchase_nuclear_weapon')?>" class="btn btn-primary">Develop Nuclear Weapon</a>
+			      		<?php } ?>
                     <a href="<?php echo base_url(); ?>" class="btn" data-dismiss="modal">Close</a>
                 </div>
 		</div>

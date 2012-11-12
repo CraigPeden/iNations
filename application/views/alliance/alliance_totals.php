@@ -1,22 +1,23 @@
 	    	<div class="span10">
-	    		<h1 style="text-align: center;"><?php echo $alliance_stats['alliance']; ?></h1>
+	    		<h3 style="text-align: center;"><?php echo $alliance_stats['alliance']; ?></h3>
 				<table class="table table-striped table-bordered">
 	   				<thead>
-				          <tr>       
-				            <th>Infrastructure</th>
-				            <th>Technology</th> 
-				            <th>Land</th>
-				            <th>Citizens</th>
-				          </tr>
+	   					<td>Last Updated <?php echo unix_to_human(now(), FALSE, 'eu'); ?></td>
+			          <tr>       
+			            <th>Infrastructure</th>
+			            <th>Technology</th> 
+			            <th>Land</th>
+			            <th>Citizens</th>
+			          </tr>
 	    			</thead>
 	    			<tbody>
-	    			<tr>
-						<td><?php echo $alliance_stats['infrastructure']; ?></td> 
-						<td><?php echo $alliance_stats['technology']; ?></td>
-						<td><?php echo $alliance_stats['land']; ?></td> 
-						<td><?php echo $alliance_stats['citizens']; ?></td>
-						  			
-			        </tr>
+		    			<tr>
+							<td><?php echo $alliance_stats['infrastructure']; ?></td> 
+							<td><?php echo $alliance_stats['technology']; ?></td>
+							<td><?php echo $alliance_stats['land']; ?></td> 
+							<td><?php echo $alliance_stats['citizens']; ?></td>
+							  			
+				        </tr>
 	    			</tbody>
 	    		</table> 
 	    		<table class="table table-striped table-bordered">

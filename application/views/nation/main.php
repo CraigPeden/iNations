@@ -23,13 +23,17 @@
 		       				<td colspan="2"><?php echo $nation_info->nation_name; ?></td>
 		          		</tr>
 		          		<tr>
+		            		<td>Activity:</td>
+		       				<td colspan="2"><?php echo "Last seen " . $activity->level . " ago."; ?></td>
+		          		</tr>
+		          		<tr>
 		            		<td>Alliance Affiliation:</td>
 		            		<td><?php echo $nation_info->nation_alliance_affiliation; ?></td>
 		            		<td><a data-toggle="modal" href="#allianceModal" class="">Edit</a></td>
 		           		</tr>
 		           		<tr>
 		            		<td>Team Colour:</td>
-				          	<td><?php echo '<img src="../../img/team_colours/' . $nation_info->nation_team_colour . '.png" width="8px" height="8px" class="team_colour" /> ' . $nation_info->nation_team_colour; ?></td>
+				          	<td><?php echo '<img src="../../iNations/img/team_colours/' . $nation_info->nation_team_colour . '.png" width="8px" height="8px" class="team_colour" /> ' . $nation_info->nation_team_colour; ?></td>
 				          	<td><a data-toggle="modal" href="#colourModal" class="">Edit</a></td>
 		           		</tr>
 		           		<tr>
@@ -44,7 +48,8 @@
 		           		</tr>
 		           		<tr>
 		            		<td>National Resources:</td>
-		            		<td colspan="2"><?php echo $nation_info->nation_infrastructure; ?></td>
+		            		<td><?php echo $nation_info->nation_resource_one . ', ' . $nation_info->nation_resource_two; ?></td>
+		            		<td><a href="<?php echo site_url('iNations/resources'); ?>">Edit</td>
 		           		</tr>
 		           		<tr>
 		            		<td>Infrastructure:</td>
@@ -146,43 +151,43 @@
 	            				<label class="control-label">Radio buttons</label>
 	            				<div class="controls">
 	              					<label class="radio">
-	                					<input type="radio" name="radioColour" id="radioColour13" value="None" <?php if($nation_info->nation_team_colour == 'None') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../img/team_colours/none.png" height="8px" width="8px" /> None
+	                					<input type="radio" name="radioColour" id="radioColour13" value="None" <?php if($nation_info->nation_team_colour == 'None') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/none.png" height="8px" width="8px" /> None
 	              					</label>
 	              					<label class="radio">
-	                					<input type="radio" name="radioColour" id="radioColour1" value="Red" <?php if($nation_info->nation_team_colour == 'Red') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../img/team_colours/red.png" height="8px" width="8px" /> Red
+	                					<input type="radio" name="radioColour" id="radioColour1" value="Red" <?php if($nation_info->nation_team_colour == 'Red') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/red.png" height="8px" width="8px" /> Red
 	              					</label>
 	              					<label class="radio">
-	                					<input type="radio" name="radioColour" id="radioColour2" value="Blue" <?php if($nation_info->nation_team_colour == 'Blue') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../img/team_colours/blue.png" height="8px" width="8px" /> Blue
+	                					<input type="radio" name="radioColour" id="radioColour2" value="Blue" <?php if($nation_info->nation_team_colour == 'Blue') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/blue.png" height="8px" width="8px" /> Blue
 	              					</label>
 	              					<label class="radio">
-	                					<input type="radio" name="radioColour" id="radioColour3" value="Green" <?php if($nation_info->nation_team_colour == 'Green') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../img/team_colours/green.png" height="8px" width="8px" /> Green
+	                					<input type="radio" name="radioColour" id="radioColour3" value="Green" <?php if($nation_info->nation_team_colour == 'Green') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/green.png" height="8px" width="8px" /> Green
 	              					</label>
 	              					<label class="radio">
-	                					<input type="radio" name="radioColour" id="radioColour4" value="Pink" <?php if($nation_info->nation_team_colour == 'Pink') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../img/team_colours/pink.png" height="8px" width="8px" /> Pink
+	                					<input type="radio" name="radioColour" id="radioColour4" value="Pink" <?php if($nation_info->nation_team_colour == 'Pink') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/pink.png" height="8px" width="8px" /> Pink
 	              					</label>
 	              					<label class="radio">
-	                					<input type="radio" name="radioColour" id="radioColour5" value="Purple" <?php if($nation_info->nation_team_colour == 'Purple') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../img/team_colours/purple.png" height="8px" width="8px" /> Purple
+	                					<input type="radio" name="radioColour" id="radioColour5" value="Purple" <?php if($nation_info->nation_team_colour == 'Purple') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/purple.png" height="8px" width="8px" /> Purple
 	              					</label>
 	              					<label class="radio">
-	                					<input type="radio" name="radioColour" id="radioColour6" value="Orange" <?php if($nation_info->nation_team_colour == 'Orange') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../img/team_colours/orange.png" height="8px" width="8px" /> Orange
+	                					<input type="radio" name="radioColour" id="radioColour6" value="Orange" <?php if($nation_info->nation_team_colour == 'Orange') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/orange.png" height="8px" width="8px" /> Orange
 	              					</label>
 	              					<label class="radio">
-	                					<input type="radio" name="radioColour" id="radioColour7" value="Grey" <?php if($nation_info->nation_team_colour == 'Grey') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../img/team_colours/grey.png" height="8px" width="8px" /> Grey
+	                					<input type="radio" name="radioColour" id="radioColour7" value="Grey" <?php if($nation_info->nation_team_colour == 'Grey') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/grey.png" height="8px" width="8px" /> Grey
 	              					</label>
 	              					<label class="radio">
-	                					<input type="radio" name="radioColour" id="radioColour8" value="Black" <?php if($nation_info->nation_team_colour == 'Black') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../img/team_colours/black.png" height="8px" width="8px" /> Black
+	                					<input type="radio" name="radioColour" id="radioColour8" value="Black" <?php if($nation_info->nation_team_colour == 'Black') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/black.png" height="8px" width="8px" /> Black
 	              					</label>
 	              					<label class="radio">
-	                					<input type="radio" name="radioColour" id="radioColour9" value="White" <?php if($nation_info->nation_team_colour == 'White') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../img/team_colours/white.png" height="8px" width="8px" /> White
+	                					<input type="radio" name="radioColour" id="radioColour9" value="White" <?php if($nation_info->nation_team_colour == 'White') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/white.png" height="8px" width="8px" /> White
 	              					</label>
 	              					<label class="radio">
-	                					<input type="radio" name="radioColour" id="radioColour10" value="Aqua" <?php if($nation_info->nation_team_colour == 'Aqua') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../img/team_colours/aqua.png" height="8px" width="8px" /> Aqua
+	                					<input type="radio" name="radioColour" id="radioColour10" value="Aqua" <?php if($nation_info->nation_team_colour == 'Aqua') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/aqua.png" height="8px" width="8px" /> Aqua
 	              					</label>
 	              					<label class="radio">
-	                					<input type="radio" name="radioColour" id="radioColour11" value="Yellow" <?php if($nation_info->nation_team_colour == 'Yellow') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../img/team_colours/yellow.png" height="8px" width="8px" /> Yellow
+	                					<input type="radio" name="radioColour" id="radioColour11" value="Yellow" <?php if($nation_info->nation_team_colour == 'Yellow') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/yellow.png" height="8px" width="8px" /> Yellow
 	              					</label>
 	              					<label class="radio">
-	                					<input type="radio" name="radioColour" id="radioColour12" value="Brown" <?php if($nation_info->nation_team_colour == 'Brown') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../img/team_colours/brown.png" height="8px" width="8px" /> Brown              					
+	                					<input type="radio" name="radioColour" id="radioColour12" value="Brown" <?php if($nation_info->nation_team_colour == 'Brown') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/brown.png" height="8px" width="8px" /> Brown              					
 	                				</label>
 	            				</div>
 	          				</div>
@@ -206,34 +211,34 @@
 	            				<label class="control-label">Radio buttons</label>
 	            				<div class="controls">
 	              					<label class="radio">
-	                					<input type="radio" name="radioGovernment" id="radioGovernment1" value="Anarchist" <?php if($nation_info->nation_government == 'Anarchist') { echo 'checked=""'; } ?> disabled="disabled"> <img class="team_colour" src="../../img/team_colours/red.png" height="8px" width="8px" /> Anarchist
+	                					<input type="radio" name="radioGovernment" id="radioGovernment1" value="Anarchist" <?php if($nation_info->nation_government == 'Anarchist') { echo 'checked=""'; } ?> disabled="disabled"> <img class="team_colour" src="../../iNations/img/team_colours/red.png" height="8px" width="8px" /> Anarchist
 	              					</label>
 	              					<label class="radio">
-	                					<input type="radio" name="radioGovernment" id="radioGovernment2" value="Capitalist" <?php if($nation_info->nation_government == 'Capitalist') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../img/team_colours/blue.png" height="8px" width="8px" /> Capitalist
+	                					<input type="radio" name="radioGovernment" id="radioGovernment2" value="Capitalist" <?php if($nation_info->nation_government == 'Capitalist') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/blue.png" height="8px" width="8px" /> Capitalist
 	              					</label>
 	              					<label class="radio">
-	                					<input type="radio" name="radioGovernment" id="radioGovernment3" value="Communist" <?php if($nation_info->nation_government == 'Communist') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../img/team_colours/blue.png" height="8px" width="8px" /> Communist
+	                					<input type="radio" name="radioGovernment" id="radioGovernment3" value="Communist" <?php if($nation_info->nation_government == 'Communist') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/blue.png" height="8px" width="8px" /> Communist
 	              					</label>
 	              					<label class="radio">
-	                					<input type="radio" name="radioGovernment" id="radioGovernment4" value="Democratic" <?php if($nation_info->nation_government == 'Democratic') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../img/team_colours/green.png" height="8px" width="8px" /> Democratic
+	                					<input type="radio" name="radioGovernment" id="radioGovernment4" value="Democratic" <?php if($nation_info->nation_government == 'Democracy') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/green.png" height="8px" width="8px" /> Democratic
 	              					</label>
 	              					<label class="radio">
-	                					<input type="radio" name="radioGovernment" id="radioGovernment5" value="Dictorial" <?php if($nation_info->nation_government == 'Dictatorship') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../img/team_colours/green.png" height="8px" width="8px" /> Dictorial (Dictatorship)
+	                					<input type="radio" name="radioGovernment" id="radioGovernment5" value="Dictorial" <?php if($nation_info->nation_government == 'Dictorial') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/green.png" height="8px" width="8px" /> Dictatorship
 	              					</label>
 	              					<label class="radio">
-	                					<input type="radio" name="radioGovernment" id="radioGovernment6" value="Federalist" <?php if($nation_info->nation_government == 'Federalist') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../img/team_colours/green.png" height="8px" width="8px" /> Federalist
+	                					<input type="radio" name="radioGovernment" id="radioGovernment6" value="Federalist" <?php if($nation_info->nation_government == 'Federalist') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/green.png" height="8px" width="8px" /> Federalist
 	              					</label>
 	              					<label class="radio">
-	                					<input type="radio" name="radioGovernment" id="radioGovernment7" value="Monarchist" <?php if($nation_info->nation_government == 'Monarchist') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../img/team_colours/pink.png" height="8px" width="8px" /> Monarchist
+	                					<input type="radio" name="radioGovernment" id="radioGovernment7" value="Monarchist" <?php if($nation_info->nation_government == 'Monarchist') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/pink.png" height="8px" width="8px" /> Monarchist
 	              					</label>
 	              					<label class="radio">
-	                					<input type="radio" name="radioGovernment" id="radioGovernment8" value="National Socialist" <?php if($nation_info->nation_government == 'National Socialist') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../img/team_colours/purple.png" height="8px" width="8px" /> National Socialist
+	                					<input type="radio" name="radioGovernment" id="radioGovernment8" value="National Socialist" <?php if($nation_info->nation_government == 'National Socialist') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/purple.png" height="8px" width="8px" /> National Socialist
 	              					</label>
 	              					<label class="radio">
-	                					<input type="radio" name="radioGovernment" id="radioGovernment9" value="Revolutionist" <?php if($nation_info->nation_government == 'Revolutionist') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../img/team_colours/orange.png" height="8px" width="8px" /> Revolutionist
+	                					<input type="radio" name="radioGovernment" id="radioGovernment9" value="Revolutionist" <?php if($nation_info->nation_government == 'Revolutionist') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/orange.png" height="8px" width="8px" /> Revolutionist
 	              					</label>
 	              					<label class="radio">
-	                					<input type="radio" name="radioGovernment" id="radioGovernment10" value="Totalitarianist" <?php if($nation_info->nation_government == 'Totalitarianist') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../img/team_colours/grey.png" height="8px" width="8px" /> Totalitarianist
+	                					<input type="radio" name="radioGovernment" id="radioGovernment10" value="Totalitarianist" <?php if($nation_info->nation_government == 'Totalitarianist') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/grey.png" height="8px" width="8px" /> Totalitarianist
 	              					</label>
 	            				</div>
 	          				</div>
@@ -257,31 +262,31 @@
 	            				<label class="control-label">Radio buttons</label>
 	            				<div class="controls">
 	              					<label class="radio">
-	                					<input type="radio" name="radioReligion" id="radioReligion1" value="Buddhism" <?php if($nation_info->nation_religion == 'Buddhism') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../img/team_colours/red.png" height="8px" width="8px" /> Buddhism
+	                					<input type="radio" name="radioReligion" id="radioReligion1" value="Buddhism" <?php if($nation_info->nation_religion == 'Buddhism') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/red.png" height="8px" width="8px" /> Buddhism
 	              					</label>
 	              					<label class="radio">
-	                					<input type="radio" name="radioReligion" id="radioReligion2" value="Christianity" <?php if($nation_info->nation_religion == 'Christianity') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../img/team_colours/blue.png" height="8px" width="8px" /> Christianity
+	                					<input type="radio" name="radioReligion" id="radioReligion2" value="Christianity" <?php if($nation_info->nation_religion == 'Christianity') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/blue.png" height="8px" width="8px" /> Christianity
 	              					</label>
 	              					<label class="radio">
-	                					<input type="radio" name="radioReligion" id="radioReligion3" value="Hindu" <?php if($nation_info->nation_religion == 'Hindu') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../img/team_colours/blue.png" height="8px" width="8px" /> Hindu
+	                					<input type="radio" name="radioReligion" id="radioReligion3" value="Hindu" <?php if($nation_info->nation_religion == 'Hindu') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/blue.png" height="8px" width="8px" /> Hindu
 	              					</label>
 	              					<label class="radio">
-	                					<input type="radio" name="radioReligion" id="radioReligion4" value="Islam" <?php if($nation_info->nation_religion == 'Islam') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../img/team_colours/green.png" height="8px" width="8px" /> Islam
+	                					<input type="radio" name="radioReligion" id="radioReligion4" value="Islam" <?php if($nation_info->nation_religion == 'Islam') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/green.png" height="8px" width="8px" /> Islam
 	              					</label>
 	              					<label class="radio">
-	                					<input type="radio" name="radioReligion" id="radioReligion5" value="Jewish" <?php if($nation_info->nation_religion == 'Jewish') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../img/team_colours/green.png" height="8px" width="8px" /> Jewish
+	                					<input type="radio" name="radioReligion" id="radioReligion5" value="Jewish" <?php if($nation_info->nation_religion == 'Jewish') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/green.png" height="8px" width="8px" /> Jewish
 	              					</label>
 	              					<label class="radio">
-	                					<input type="radio" name="radioReligion" id="radioReligion6" value="None" <?php if($nation_info->nation_religion == 'None') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../img/team_colours/green.png" height="8px" width="8px" /> None
+	                					<input type="radio" name="radioReligion" id="radioReligion6" value="None" <?php if($nation_info->nation_religion == 'None') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/green.png" height="8px" width="8px" /> None
 	              					</label>
 	              					<label class="radio">
-	                					<input type="radio" name="radioReligion" id="radioReligion7" value="Shinto" <?php if($nation_info->nation_religion == 'Shinto') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../img/team_colours/pink.png" height="8px" width="8px" /> Shinto
+	                					<input type="radio" name="radioReligion" id="radioReligion7" value="Shinto" <?php if($nation_info->nation_religion == 'Shinto') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/pink.png" height="8px" width="8px" /> Shinto
 	              					</label>
 	              					<label class="radio">
-	                					<input type="radio" name="radioReligion" id="radioReligion8" value="Sikh" <?php if($nation_info->nation_religion == 'Sikh') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../img/team_colours/purple.png" height="8px" width="8px" /> Sikh
+	                					<input type="radio" name="radioReligion" id="radioReligion8" value="Sikh" <?php if($nation_info->nation_religion == 'Sikh') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/purple.png" height="8px" width="8px" /> Sikh
 	              					</label>
 	              					<label class="radio">
-	                					<input type="radio" name="radioReligion" id="radioReligion9" value="Taoism" <?php if($nation_info->nation_religion == 'Taoism') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../img/team_colours/orange.png" height="8px" width="8px" /> Taoism
+	                					<input type="radio" name="radioReligion" id="radioReligion9" value="Taoism" <?php if($nation_info->nation_religion == 'Taoism') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/orange.png" height="8px" width="8px" /> Taoism
 	              					</label>
 	            				</div>
 	          				</div>

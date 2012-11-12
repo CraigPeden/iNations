@@ -18,11 +18,35 @@
 		//Main Page					//
 		/////////////////////////////
 		
+		function timeSince ($date1)
+        {
+		    $time = time() - $date1; // to get the time since that moment
+		    $tokens = array (
+		        31536000 => 'year',
+		        2592000 => 'month',
+		        604800 => 'week',
+		        86400 => 'day',
+		        3600 => 'hour',
+		        60 => 'minute',
+		        1 => 'second'
+		    );
+		
+		    foreach ($tokens as $unit => $text) 
+		    {
+		        if ($time < $unit) continue;
+		        $numberOfUnits = floor($time / $unit);
+		        return $numberOfUnits.' '.$text.(($numberOfUnits>1)?'s':'');
+		    }
+        }
+
+		
 		function index()
-		{
+		{	
+			$stuff = $this->Nation_model->get_nation_by_id($this->session->userdata('nation_id'));
+			$activity->level = $this->timeSince(strtotime($stuff->nation_tax_collection_date));
 			$this->load->view('assets/header', array('user' => $this->User_model->get_user_by_id($this->session->userdata('user_id'))));
 			$this->load->view('assets/sidebar');
-			$this->load->view('nation/main', array('nation_info' => $this->Nation_model->get_nation_by_id($this->session->userdata('nation_id'))));
+			$this->load->view('nation/main', array('nation_info' => $this->Nation_model->get_nation_by_id($this->session->userdata('nation_id')), 'activity' => $activity));
 			$this->load->view('assets/footer');
 		}
         
@@ -38,6 +62,14 @@
 			$this->load->view('assets/header', array('user' => $this->User_model->get_user_by_id($this->session->userdata('user_id'))));
 			$this->load->view('assets/sidebar');
 			$this->load->view('nation/infrastructure', array('nation_info' => $this->Nation_model->get_nation_by_id($this->session->userdata('nation_id'))));
+			$this->load->view('assets/footer');
+		}
+
+		function resources()
+		{
+			$this->load->view('assets/header', array('user' => $this->User_model->get_user_by_id($this->session->userdata('user_id'))));
+			$this->load->view('assets/sidebar');
+			$this->load->view('nation/resources', array('nation_info' => $this->Nation_model->get_nation_by_id($this->session->userdata('nation_id'))));
 			$this->load->view('assets/footer');
 		}
 		
@@ -91,14 +123,15 @@
 			$this->load->view('assets/footer');
         }
         
-        function buy_nuclear_weapons()
+        function purchase_nuclear_weapon()
         {
-            if (($this->Nation_model->check_wonder($this->session->userdata('nation_id'), 'Manhatten Project')) == "TRUE") {
+            if (TRUE == TRUE) {
                 $this->Nation_model->purchase_nuclear_weapons();
+                redirect('inations');
             }
             else {
                 $this->session->set_flashdata("error", 'Requires Manhatten Project');
-                redirect('inations');
+                redirect('inations/purchase_nuclear_weapons');
             }
                 
         }
@@ -250,6 +283,20 @@
 			$colour = $this->input->post('allianceAffiliation');
 			$this->Nation_model->change_alliance_affiliation($colour);
 			redirect('Inations');
+		}
+		
+		function change_resources()
+		{
+			$resource1 = $this->input->post('optionsResources');
+			$resource2 = $this->input->post('optionsResourcesTwo');
+			if ($resource1 == $resource2) {
+				$this->session->set_flashdata('errormsg', 'You must choose two seperate resources');
+				redirect('Inations/resources');
+			}
+			else {
+				$this->Nation_model->change_resources($resource1, $resource2);
+				redirect('Inations');
+			}
 		}
 		
 		function generate_resources()
