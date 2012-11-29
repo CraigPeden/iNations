@@ -24,7 +24,7 @@
 		          		</tr>
 		          		<tr>
 		            		<td>Current Funds:</td>
-		            		<td>£<?php echo $nation_info->nation_funds; ?></a></td>
+		            		<td><?php echo $nation_info->nation_currency . $nation_info->nation_funds; ?></a></td>
 		           		</tr>
 		        	</tbody>
 		      	</table>

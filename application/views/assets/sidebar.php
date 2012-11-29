@@ -3,9 +3,7 @@
 			<div class="span2">
 				<div class="well" style="padding: 8px 0;">
         			<ul class="nav nav-list">
-          				<li class="nav-header">Nation Information</li>
-          				<li<?php if(uri_string() == "") { echo ' class="active" '; } ?>><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> View My Nation</a></li>
-          				<li class="nav-header">Economic Purchasing</li>
+           				<li class="nav-header">Economic Purchasing</li>
 				      	<li<?php if(uri_string() == "inations/infrastructure") { echo ' class="active" '; }?>><a href="<?php echo site_url("inations/infrastructure");?>"><i class="icon-road"></i> Buy Infrastructure</a></li>
 				       	<li<?php if(uri_string() == "inations/technology") { echo ' class="active" '; }?>><a href="<?php echo site_url("inations/technology");?>"><i class="icon-signal"></i> Buy Technology</a></li>
 				       	<li<?php if(uri_string() == "inations/land") { echo ' class="active" '; }?>><a href="<?php echo site_url("inations/land");?>"><i class="icon-leaf"></i> Buy Land</a></li>

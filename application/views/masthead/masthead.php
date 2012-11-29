@@ -8,7 +8,7 @@
 <div class="container-fluid">
 
 	<!-- Main hero unit for a primary marketing message or call to action -->
-	<div class="hero-unit">
+	<div class="hero-unit" style="background-color: #fff;">
 		<div class="row-fluid">
 			<div class="span4">
 				<img src="../../iNations/img/globe-bw.png" width="300px" height="300px"/>

@@ -46,13 +46,22 @@ $rs = mysql_query($sql);*/
           		<a class="brand brand_logo" href="<?php echo base_url();?>">iNations</a>
           		<div class="nav-collapse">
             		<ul class="nav">
-                        <li <?php if (uri_string() == "") {echo 'class="active"';} ?>><a href="<?php echo site_url(''); ?>"><i class="icon-home icon"></i> Home</a></li>
+                        <li <?php if (uri_string() == "") {echo 'class="active"';} ?>><a href="<?php echo site_url(''); ?>"><i class="icon-home icon"></i> View My Nation</a></li>
                         <li <?php if (uri_string() == "iNations/about") {echo 'class="active"';} ?>><a href="<?php echo site_url('iNations/about'); ?>"><i class="icon-inbox icon"></i> About</a></li>
                         <li <?php if (uri_string() == "iNations/changelog") {echo 'class="active"';} ?>><a href="#<?php //echo site_url('iNations/changelog'); ?>"><i class="icon-file icon"></i> Changelog</a></li>
                         <li <?php if (uri_string() == "iNations/contact") {echo 'class="active"';} ?>><a href="#<?php //echo site_url('iNations/contact'); ?>"><i class="icon-envelope icon"></i> Contact</a></li>
             		</ul>
             		<?php if (isset($user)) { ?>
-		       			<p class="navbar-text pull-right">Logged in as <a href="<?php echo base_url('Login/logout'); ?>"><?php echo $user->username; ?></a></p>
+		       			<ul class="nav pull-right">
+                    <li id="fat-menu" class="dropdown">
+                      <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown"><?php echo $user->username; ?> <b class="caret"></b></a>
+                      <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
+                        <li><a href="<?php echo site_url('iNations/settings'); ?>"tabindex="-1" href="#"><i class="icon-cog icon"></i> Settings</a></li>
+                        <li class="divider"></li>
+                        <li><a href="<?php echo site_url('Login/logout'); ?>" tabindex="-1" href="#"><i class="icon-off icon"></i> Logout</a></li>
+                      </ul>
+                    </li>
+                  </ul>
             		<?php } ?>
             	</div> <!--/.nav-collapse -->
         	</div> <!--/.container -->

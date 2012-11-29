@@ -1,4 +1,10 @@
 	    	<div class="span10">
+	    		<?php if ($this->session->flashdata('errormsg') != '') { ?>
+					<div class="alert alert-error fade in" data-alert="alert">
+						<a class="close" data-dismiss="alert" href="#">×</a>
+						<span><?php echo $this->session->flashdata('errormsg'); ?></span>
+					</div>
+    			<?php } ?>
 				<table class="table table-bordered">
 		        	<thead>
 		          		<tr>
@@ -7,7 +13,7 @@
 		        	</thead>
 		        	<tbody>
 		        		<tr>
-		        			<td colspan="3"><?php echo $nation_info->nation_name . ', lead by ' . $nation_info->nation_ruler . ' is a well developed nation on the ' . $nation_info->nation_team_colour . ' team. Geographically, it is situated on Bob and spans an area of ' . $nation_info->nation_land . ' square miles. It is lead by a ' . $nation_info->nation_government . ' Government and the national religion is ' . $nation_info->nation_religion . '. ' . $nation_info->nation_name . ' has a population of ' . $nation_info->nation_citizens . ' who are relatively affluent with a median income of £' . $nation_info->nation_average_income . '. This is then taxed at a rate of ' . $nation_info->nation_tax_rate . '%.'; ?>
+		        			<td colspan="3"><?php echo $nation_info->nation_name . ', lead by ' . $nation_info->nation_ruler . ' is a well developed nation on the ' . $nation_info->nation_team_colour . ' team. Geographically, it is situated on Bob and spans an area of ' . $nation_info->nation_land . ' square miles. It is lead by a ' . $nation_info->nation_government . ' Government and the national religion is ' . $nation_info->nation_religion . '. ' . $nation_info->nation_name . ' has a population of ' . $nation_info->nation_citizens . ' who are relatively affluent with a median income of ' . $nation_info->nation_currency . $nation_info->nation_average_income . '. This is then taxed at a rate of ' . $nation_info->nation_tax_rate . '%.'; ?>
 		        			</td>
 		        		</tr>
 		        		<tr>
@@ -49,7 +55,7 @@
 		           		<tr>
 		            		<td>National Resources:</td>
 		            		<td><?php echo $nation_info->nation_resource_one . ', ' . $nation_info->nation_resource_two; ?></td>
-		            		<td><a href="<?php echo site_url('iNations/resources'); ?>">Edit</td>
+		            		<td><a data-toggle="modal" href="#resourceModal" class="">Edit</a><!--<a href="<?php echo site_url('iNations/resources'); ?>">Edit--></td>
 		           		</tr>
 		           		<tr>
 		            		<td>Infrastructure:</td>
@@ -65,7 +71,7 @@
 		          		</tr>
 		          		<tr>
 		            		<td>Funds:</td>
-		            		<td colspan="2">£<?php echo $nation_info->nation_funds; ?></td>
+		            		<td colspan="2"><?php echo $nation_info->nation_currency . $nation_info->nation_funds; ?></td>
 		          		</tr>
 		        	</tbody>
 		      	</table>
@@ -83,7 +89,7 @@
 		          		</tr>
 		          		<tr>
 		            		<td>Average Gross Income:</td>
-		            		<td colspan="2">£<?php echo $nation_info->nation_average_income; ?></a></td>
+		            		<td colspan="2"><?php echo $nation_info->nation_currency . $nation_info->nation_average_income; ?></a></td>
 		           		</tr>
 		           		<tr>
 		            		<td>Income Tax Rate:</td>
@@ -121,6 +127,7 @@
 	            	<a class="close" data-dismiss="modal">×</a>
 	              	<h3>Alliance Affiliation</h3>
 	            </div>
+	            <p class="alert alert-info no-radius-border">Select an alliance affiliation for your nation.</p>
 		       	<form method="post" class="form-horizontal clearmargin" action="<?php echo site_url('Inations/change_affiliation'); ?>">
 		       		<fieldset>
 			       		<div class="modal-body">
@@ -144,11 +151,12 @@
 	            	<a class="close" data-dismiss="modal">×</a>
 	              	<h3>Team Colour</h3>
 	            </div>
+	            <p class="alert alert-info no-radius-border">Select a team colour for your nation.</p>
 	            <form method="post" class="form-horizontal clearmargin" action="<?php echo site_url('Inations/change_colour'); ?>">
 		            <fieldset>
 		            	<div class="modal-body">
 	          				<div class="control-group">
-	            				<label class="control-label">Radio buttons</label>
+	            				<label class="control-label">Colours:</label>
 	            				<div class="controls">
 	              					<label class="radio">
 	                					<input type="radio" name="radioColour" id="radioColour13" value="None" <?php if($nation_info->nation_team_colour == 'None') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/none.png" height="8px" width="8px" /> None
@@ -193,7 +201,12 @@
 	          				</div>
 	          			</div>
 			            <div class="modal-footer">
-			              	<button type="submit" class="btn btn-primary">Save changes</button>
+			            	<?php if ($nation_info->nation_changed_team = TRUE) { ?>
+			            		<span class="alert alert-error pull-left alert-modal">Only change team once daily.</span>
+			            		<a href="#" class="btn btn-primary" disabled>Save changes</a>
+			            	<?php } else { ?>
+			              		<button type="submit" class="btn btn-primary">Save changes</button>
+			              	<?php } ?>
 			              	<a href="#" class="btn" data-dismiss="modal">Close</a>
 			            </div>
 		      	 	</fieldset>
@@ -204,11 +217,12 @@
 	            	<a class="close" data-dismiss="modal">×</a>
 	              	<h3>National Government</h3>
 	            </div>
+	            <p class="alert alert-info no-radius-border">Select a style of government for your nation.</p>
 	            <form method="post" class="form-horizontal clearmargin" action="<?php echo site_url('Inations/change_government'); ?>">
 		            <fieldset>
 		            	<div class="modal-body">
 	          				<div class="control-group">
-	            				<label class="control-label">Radio buttons</label>
+	            				<label class="control-label">Governments:</label>
 	            				<div class="controls">
 	              					<label class="radio">
 	                					<input type="radio" name="radioGovernment" id="radioGovernment1" value="Anarchist" <?php if($nation_info->nation_government == 'Anarchist') { echo 'checked=""'; } ?> disabled="disabled"> <img class="team_colour" src="../../iNations/img/team_colours/red.png" height="8px" width="8px" /> Anarchist
@@ -244,7 +258,12 @@
 	          				</div>
 	          			</div>
 			            <div class="modal-footer">
-			              	<button type="submit" class="btn btn-primary">Save changes</button>
+			              	<?php if ($nation_info->nation_changed_government = TRUE) { ?>
+			            		<span class="alert alert-error pull-left alert-modal">Only change government once daily.</span>
+			            		<a href="#" class="btn btn-primary" disabled>Save changes</a>
+			            	<?php } else { ?>
+			              		<button type="submit" class="btn btn-primary">Save changes</button>
+			              	<?php } ?>
 			              	<a href="#" class="btn" data-dismiss="modal">Close</a>
 			            </div>
 		      	 	</fieldset>
@@ -255,11 +274,12 @@
 	            	<a class="close" data-dismiss="modal">×</a>
 	              	<h3>National Religion</h3>
 	            </div>
+	            <p class="alert alert-info no-radius-border">Select a national religion for your nation.</p>
 	            <form method="post" class="form-horizontal clearmargin" action="<?php echo site_url('Inations/change_religion'); ?>">
 		            <fieldset>
 		            	<div class="modal-body">
 	          				<div class="control-group">
-	            				<label class="control-label">Radio buttons</label>
+	            				<label class="control-label">Religions:</label>
 	            				<div class="controls">
 	              					<label class="radio">
 	                					<input type="radio" name="radioReligion" id="radioReligion1" value="Buddhism" <?php if($nation_info->nation_religion == 'Buddhism') { echo 'checked=""'; } ?>> <img class="team_colour" src="../../iNations/img/team_colours/red.png" height="8px" width="8px" /> Buddhism
@@ -292,7 +312,12 @@
 	          				</div>
 	          			</div>
 			            <div class="modal-footer">
-			              	<button type="submit" class="btn btn-primary">Save changes</button>
+			            	<?php if ($nation_info->nation_changed_religion = TRUE) { ?>
+			            		<span class="alert alert-error pull-left alert-modal">Only change religion once daily.</span>
+			            		<a href="#" class="btn btn-primary" disabled>Save changes</a>
+			            	<?php } else { ?>
+			              		<button type="submit" class="btn btn-primary">Save changes</button>
+			              	<?php } ?>
 			              	<a href="#" class="btn" data-dismiss="modal">Close</a>
 			            </div>
 		      	 	</fieldset>
@@ -303,6 +328,7 @@
 	            	<a class="close" data-dismiss="modal">×</a>
 	              	<h3>Income Tax Rate</h3>
 	            </div>
+	            <p class="alert alert-info no-radius-border">Select an income tax rate for your nation.</p>
 	            <form method="post" class="form-horizontal clearmargin" action="<?php echo site_url('Inations/change_tax_rate'); ?>">
 		            <fieldset>
 		            	<div class="modal-body">
@@ -310,8 +336,14 @@
             					<label class="control-label" for="select01">Select list</label>
             					<div class="controls">
               						<select id="select01" name="tax_rate">
-              							<?php for($counter = 10; $counter < 29 ; $counter++) {
-													echo "<option>" . $counter . "%</option>";
+              							<?php for($counter = 10; $counter < 29 ; $counter++) 
+              									{
+              										$stuff = $counter;
+              										echo '<option';
+													if ($stuff == $nation_info->nation_tax_rate) {
+														echo ' selected="selected"';
+													} 
+													echo '>' .$counter . '%</option>';
 												}
 										?>
               						</select>
@@ -319,11 +351,146 @@
           					</div>
 	          			</div>
 			            <div class="modal-footer">
-			              	<button type="submit" class="btn btn-primary">Save changes</button>
+			            <?php 
+			            if ($nation_info->nation_changed_taxes) { ?>
+			            		<span class="alert alert-error pull-left alert-modal">Only change tax rate once daily.</span>
+			            		<a href="#" class="btn btn-primary" disabled="">Save changes</a>
+			            	<?php } else { ?>
+			              		<button type="submit" class="btn btn-primary">Save changes</button>
+			              	<?php } ?>
 			              	<a href="#" class="btn" data-dismiss="modal">Close</a>
 			            </div>
 		      	 	</fieldset>
 		      	 </form>
 			</div>
-		</div>	
+			<div id="resourceModal" class="modal hide fade" style="display: none; ">
+	            <div class="modal-header">
+	            	<a class="close" data-dismiss="modal">×</a>
+	              	<h3>Resources</h3>
+	            </div>
+	            <p class="alert alert-info no-radius-border">Select two resources for your nation.</p>
+					<form method="post" class="form-horizontal" action="<?php echo site_url('Inations/change_resources'); ?>">
+				    	<fieldset>
+				    		<div class="span12">
+								<div class="span6" style="padding-left:20px;">
+									<label class="radio">
+									  <input type="radio" name="optionsResources" id="optionsCoal" value="Coal" <?php if($nation_info->nation_resource_one == 'Coal') { echo 'checked=""'; } ?>>
+									  Coal
+									</label>
+									<label class="radio">
+										<input type="radio" name="optionsResources" id="optionsPigs" value="Pigs" <?php if($nation_info->nation_resource_one == 'Pigs') { echo 'checked=""'; } ?>>
+									 Pigs
+									</label>
+									<label class="radio">
+									  <input type="radio" name="optionsResources" id="optionsIron" value="Iron" <?php if($nation_info->nation_resource_one == 'Iron') { echo 'checked=""'; } ?>>
+									 Iron
+									</label>
+									<label class="radio">
+									  <input type="radio" name="optionsResources" id="optionsUranium" value="Uranium" <?php if($nation_info->nation_resource_one == 'Uranium') { echo 'checked=""'; } ?>>
+									  Uranium							
+									</label>
+									<label class="radio">
+									  <input type="radio" name="optionsResources" id="optionsWater" value="Water" <?php if($nation_info->nation_resource_one == 'Water') { echo 'checked=""'; } ?>>
+									  Water
+									</label>
+									<label class="radio">
+									  <input type="radio" name="optionsResources" id="optionsSugar" value="Sugar" <?php if($nation_info->nation_resource_one == 'Sugar') { echo 'checked=""'; } ?>>
+									  Sugar							
+									</label>
+									<label class="radio">
+									  <input type="radio" name="optionsResources" id="optionsSilver" value="Silver" <?php if($nation_info->nation_resource_one == 'Silver') { echo 'checked=""'; } ?>>
+									  Silver
+									</label>
+									<label class="radio">
+									  <input type="radio" name="optionsResources" id="optionsLead" value="Lead" <?php if($nation_info->nation_resource_one == 'Lead') { echo 'checked=""'; } ?>>
+									  Lead							
+									</label>
+									<label class="radio">
+									  <input type="radio" name="optionsResources" id="optionsLumber" value="Lumber" <?php if($nation_info->nation_resource_one == 'Lumber') { echo 'checked=""'; } ?>>
+									  Lumber
+									</label>
+									<label class="radio">
+									  <input type="radio" name="optionsResources" id="optionsAluminium" value="Aluminium" <?php if($nation_info->nation_resource_one == 'Aluminium') { echo 'checked=""'; } ?>>
+									  Aluminium							
+									</label>
+									<label class="radio">
+									  <input type="radio" name="optionsResources" id="optionsCattle" value="Cattle" <?php if($nation_info->nation_resource_one == 'Cattle') { echo 'checked=""'; } ?>>
+									  Cattle
+									</label>
+									<label class="radio">
+									  <input type="radio" name="optionsResources" id="optionsRubber" value="Rubber" <?php if($nation_info->nation_resource_one == 'Rubber') { echo 'checked=""'; } ?>>
+									  Rubber							
+									</label>
+									<label class="radio">
+									  <input type="radio" name="optionsResources" id="optionsFish" value="Fish" <?php if($nation_info->nation_resource_one == 'Fish') { echo 'checked=""'; } ?>>
+									  Fish							
+									</label>						
+								</div>
+								<div class="span6">
+									<label class="radio">
+									  <input type="radio" name="optionsResourcesTwo" id="optionsCoal" value="Coal" <?php if($nation_info->nation_resource_two == 'Coal') { echo 'checked=""'; } ?>>
+									  Coal
+									</label>
+									<label class="radio">
+										<input type="radio" name="optionsResourcesTwo" id="optionsPigs" value="Pigs" <?php if($nation_info->nation_resource_two == 'Pigs') { echo 'checked=""'; } ?>>
+									 Pigs
+									</label>
+									<label class="radio">
+									  <input type="radio" name="optionsResourcesTwo" id="optionsIron" value="Iron" <?php if($nation_info->nation_resource_two == 'Iron') { echo 'checked=""'; } ?>>
+									 Iron
+									</label>
+									<label class="radio">
+									  <input type="radio" name="optionsResourcesTwo" id="optionsUranium" value="Uranium" <?php if($nation_info->nation_resource_two == 'Uranium') { echo 'checked=""'; } ?>>
+									  Uranium							
+									</label>
+									<label class="radio">
+									  <input type="radio" name="optionsResourcesTwo" id="optionsWater" value="Water" <?php if($nation_info->nation_resource_two == 'Water') { echo 'checked=""'; } ?>>
+									  Water
+									</label>
+									<label class="radio">
+									  <input type="radio" name="optionsResourcesTwo" id="optionsSugar" value="Sugar" <?php if($nation_info->nation_resource_two == 'Sugar') { echo 'checked=""'; } ?>>
+									  Sugar							
+									</label>
+									<label class="radio">
+									  <input type="radio" name="optionsResourcesTwo" id="optionsSilver" value="Silver" <?php if($nation_info->nation_resource_two == 'Silver') { echo 'checked=""'; } ?>>
+									  Silver
+									</label>
+									<label class="radio">
+									  <input type="radio" name="optionsResourcesTwo" id="optionsLead" value="Lead" <?php if($nation_info->nation_resource_two == 'Lead') { echo 'checked=""'; } ?>>
+									  Lead							
+									</label>
+									<label class="radio">
+									  <input type="radio" name="optionsResourcesTwo" id="optionsLumber" value="Lumber" <?php if($nation_info->nation_resource_two == 'Lumber') { echo 'checked=""'; } ?>>
+									  Lumber
+									</label>
+									<label class="radio">
+									  <input type="radio" name="optionsResourcesTwo" id="optionsAluminium" value="Aluminium" <?php if($nation_info->nation_resource_two == 'Aluminium') { echo 'checked=""'; } ?>>
+									  Aluminium							
+									</label>
+									<label class="radio">
+									  <input type="radio" name="optionsResourcesTwo" id="optionsCattle" value="Cattle" <?php if($nation_info->nation_resource_two == 'Cattle') { echo 'checked=""'; } ?>>
+									  Cattle
+									</label>
+									<label class="radio">
+									  <input type="radio" name="optionsResourcesTwo" id="optionsRubber" value="Rubber" <?php if($nation_info->nation_resource_two == 'Rubber') { echo 'checked=""'; } ?>>
+									  Rubber							
+									</label>
+									<label class="radio">
+									  <input type="radio" name="optionsResourcesTwo" id="optionsFish" value="Fish" <?php if($nation_info->nation_resource_one == 'Fish') { echo 'checked=""'; } ?>>
+									  Fish							
+									</label>						
+								</div>
+				    		</div>
+						</fieldset>
+					<div class="modal-footer" style="margin-top: 30px;">
+						<?php if ($nation_info->nation_changed_resources = TRUE) { ?>
+			            		<span class="alert alert-error pull-left alert-modal">Only change resources once daily.</span>
+			            		<a href="#" class="btn btn-primary" disabled>Change Resources</a>
+			            	<?php } else { ?>
+			              		<button type="submit" class="btn btn-primary">Change Resources</button>
+			              	<?php } ?>
+				        <a href="<?php echo base_url(); ?>" class="btn" data-dismiss="modal">Close</a>
+				    </div>
+			</form>
+		</div>
 	</section>

@@ -14,7 +14,7 @@
 		          		</tr>
 		          		<tr>
 		            		<td>Average Gross Income:</td>
-		            		<td colspan="2">£<?php echo $nation_info->nation_average_income; ?></a></td>
+		            		<td colspan="2"><?php echo $nation_info->nation_currency . $nation_info->nation_average_income; ?></a></td>
 		           		</tr>
 		           		<tr>
 		            		<td>Income Tax Rate:</td>
@@ -22,7 +22,7 @@
 		           		</tr>
 		           		<tr>
 		            		<td>Total Funds:</td>
-		            		<td><?php echo $nation_info->nation_funds; ?></td>
+		            		<td><?php echo $nation_info->nation_currency . $nation_info->nation_funds; ?></td>
 		           		</tr>
 		           		<tr>
 		            		<td>Total Taxes:</td>
@@ -30,7 +30,7 @@
 		           		</tr>
 		           		<tr>
 		            		<td>Total After Taxes:</td>
-		            		<td>£<?php echo $nation_info->nation_funds + (($nation_info->nation_tax_rate / 100) * $nation_info->nation_citizens * $nation_info->nation_average_income) ?></td>
+		            		<td><?php echo $nation_info->nation_currency . ($nation_info->nation_currency . ($nation_info->nation_funds + (($nation_info->nation_tax_rate / 100) * $nation_info->nation_citizens * $nation_info->nation_average_income))); ?></td>
 		           		</tr>
 		        	</tbody>
 		      	</table>

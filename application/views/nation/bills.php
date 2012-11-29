@@ -23,58 +23,58 @@
 		          		</tr>
 		          		<tr>
 		            		<td colspan="3">Cost Per Infrastructure</td>
-		            		<td>£<?php echo $nation_info->nation_infrastructure_upkeep; ?></td>
+		            		<td><?php echo $nation_info->nation_currency . $nation_info->nation_infrastructure_upkeep; ?></td>
 		          		</tr>
 		          		<tr>
 		            		<td colspan="3">Economic Bill Subtotal:</td>
-		            		<td >£<?php echo $nation_info->nation_infrastructure * $nation_info->nation_infrastructure_upkeep; ?></a></td>
+		            		<td><?php echo $nation_info->nation_currency . $nation_info->nation_infrastructure * $nation_info->nation_infrastructure_upkeep; ?></a></td>
 		           		</tr>
 		           		<tr>
 		            		<th colspan="4">Military Bills</th>
 		          		</tr>
 		           		<tr>
 		            		<td>Soldiers:</td>
-		            		<td>£1.50 each</td>
+		            		<td><?php echo $nation_info->nation_currency;?>1.50 each</td>
 		            		<td><?php echo $nation_info->nation_soldiers; ?> Soldiers</td>
-		            		<td>£<?php echo $nation_info->nation_soldiers * 1.5;?></td>
+		            		<td><?php echo $nation_info->nation_currency . $nation_info->nation_soldiers * 1.5;?></td>
 		            		
 		           		</tr>
 		           		<tr>
 		            		<td>Tanks:</td>
-		            		<td>£2 each</td>
+		            		<td><?php echo $nation_info->nation_currency;?>2 each</td>
 		            		<td><?php echo $nation_info->nation_tanks; ?> Tanks</td>
-		            		<td>£<?php echo $nation_info->nation_tanks * 2;?></td>
+		            		<td><?php echo $nation_info->nation_currency . $nation_info->nation_tanks * 2;?></td>
 		           		</tr>
 		           		<tr>
 		            		<td>Planes:</td>
-		            		<td>£2.50 each</td>
-		            		<td><?php echo $nation_info->nation_planes; ?> Planes</td>
-		            		<td>£<?php echo $nation_info->nation_planes * 2.5;?></td>
+		            		<td><?php echo $nation_info->nation_currency;?>2.50 each</td>
+		            		<td><?php echo $nation_info->nation_planes_fighters; ?> Fighters, <?php echo $nation_info->nation_planes_bombers; ?> Bombers</td>
+		            		<td><?php echo $nation_info->nation_currency . (($nation_info->nation_planes_fighters * 2.5) + ($nation_info->nation_planes_bombers * 2.5));?></td>
 		           		</tr>
 		           		<tr>
 		            		<td>Nuclear Weapons:</td>
-		            		<td>£250,000 each</td>
+		            		<td><?php echo $nation_info->nation_currency;?>250,000 each</td>
 		            		<td><?php echo $nation_info->nation_nuclear_weapons; ?> Nuclear Weapons</td>
-		            		<td>£<?php echo $nation_info->nation_nuclear_weapons * 250000;?></td>
+		            		<td><?php echo $nation_info->nation_currency . $nation_info->nation_nuclear_weapons * 250000;?></td>
 		           		</tr>
 		           		<tr>
 		            		<td colspan="3">Military Subtotal:</td>
-		            		<td>£<?php echo ($nation_info->nation_tanks * 2) + ($nation_info->nation_planes * 2.5) + ($nation_info->nation_nuclear_weapons * 250000)?></td>
+		            		<td><?php echo $nation_info->nation_currency . (($nation_info->nation_tanks * 2) + ($nation_info->nation_planes_fighters * 2.5) + ($nation_info->nation_planes_bombers * 2.5) + ($nation_info->nation_nuclear_weapons * 250000));?></td>
 		           		</tr>
 		           		<tr>
 		           			<th colspan="4">Total</th>
 		           		</tr>
 		           		<tr>
 		            		<td colspan="3">Total Funds:</td>
-		            		<td>£<?php echo $nation_info->nation_funds;?></td>
+		            		<td><?php echo $nation_info->nation_currency . $nation_info->nation_funds;?></td>
 		           		</tr>
 		           		<tr>
 		            		<td colspan="3">Total Bills:</td>
-		            		<td>£<?php echo ($nation_info->nation_infrastructure * $nation_info->nation_infrastructure_upkeep) + ($nation_info->nation_tanks * 2) + ($nation_info->nation_planes * 2.5) + ($nation_info->nation_nuclear_weapons * 250000)?></td>
+		            		<td><?php echo $nation_info->nation_currency . (($nation_info->nation_infrastructure * $nation_info->nation_infrastructure_upkeep) + ($nation_info->nation_tanks * 2) + ($nation_info->nation_planes_fighters * 2.5) + ($nation_info->nation_planes_bombers * 2.5) + ($nation_info->nation_nuclear_weapons * 250000));?></td>
 		           		</tr>
 		           		<tr>
 		            		<td colspan="3">Total Funds After Bills:</td>
-		            		<td>£<?php echo $nation_info->nation_funds - (($nation_info->nation_infrastructure * $nation_info->nation_infrastructure_upkeep) + ($nation_info->nation_tanks * 2) + ($nation_info->nation_planes * 2.5) + ($nation_info->nation_nuclear_weapons * 250000)); ?></td>
+		            		<td><?php echo $nation_info->nation_currency . ($nation_info->nation_funds - (($nation_info->nation_infrastructure * $nation_info->nation_infrastructure_upkeep) + ($nation_info->nation_tanks * 2) + ($nation_info->nation_planes_fighters * 2.5) + ($nation_info->nation_planes_bombers * 2.5) + ($nation_info->nation_nuclear_weapons * 250000))); ?></td>
 		           		</tr>
 		        	</tbody>
 		      	</table>

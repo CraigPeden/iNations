@@ -1,11 +1,5 @@
 <!-- Footer -->
-
-		<hr class="soften">
-	
 		<footer class="container">
-		
-			<p>&copy</p>
-			
 		</footer>
 	
 		<script src="../../iNations/js/jquery.js"></script>

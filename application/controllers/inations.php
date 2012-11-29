@@ -38,15 +38,40 @@
 		        return $numberOfUnits.' '.$text.(($numberOfUnits>1)?'s':'');
 		    }
         }
-
 		
 		function index()
 		{	
+			
 			$stuff = $this->Nation_model->get_nation_by_id($this->session->userdata('nation_id'));
 			$activity->level = $this->timeSince(strtotime($stuff->nation_tax_collection_date));
 			$this->load->view('assets/header', array('user' => $this->User_model->get_user_by_id($this->session->userdata('user_id'))));
 			$this->load->view('assets/sidebar');
 			$this->load->view('nation/main', array('nation_info' => $this->Nation_model->get_nation_by_id($this->session->userdata('nation_id')), 'activity' => $activity));
+			$this->load->view('assets/footer');
+		}
+		
+		function settings()
+		{
+			$this->load->view('assets/header', array('user' => $this->User_model->get_user_by_id($this->session->userdata('user_id'))));
+			$this->load->view('assets/sidebar');
+			$this->load->view('assets/settings', array('nation_info' => $this->Nation_model->get_nation_by_id($this->session->userdata('nation_id'))));
+			$this->load->view('assets/footer');
+		}
+		
+		function change_settings()
+		{
+			$date_format = $this->input->post('optionsDateFormat');
+			$this->Nation_model->change_settings($date_format);
+			redirect('inations/settings');
+		}
+		
+		function nation()
+		{	
+			$query = $this->Nation_model->get_nation_by_id($this->input->get('id'));
+			$activity = $this->timeSince(strtotime($query->nation_tax_collection_date));
+			$this->load->view('assets/header', array('user' => $this->User_model->get_user_by_id($this->session->userdata('user_id'))));
+			$this->load->view('assets/sidebar');
+			$this->load->view('nation/nations', array('nation_info' => $this->Nation_model->get_nation_by_id($this->input->get('id')), 'activity' => $activity));
 			$this->load->view('assets/footer');
 		}
         
@@ -171,10 +196,12 @@
         // Wonders
 		
 		function wonders()
-		{
+		{	
+			$query = $this->Nation_model->get_nation_by_id($this->session->userdata('nation_id'));
+			$wonder_date = $this->Nation_model->change_date(strtotime($query->nation_wonder_developed), $this->session->userdata('nation_id'));
 			$this->load->view('assets/header', array('user' => $this->User_model->get_user_by_id($this->session->userdata('user_id'))));
 			$this->load->view('assets/sidebar');
-			$this->load->view('nation/wonders', array('wonder_info' => $this->Nation_model->get_wonders()));
+			$this->load->view('nation/wonders', array('wonder_info' => $this->Nation_model->get_wonders(), 'correct' => $this->Nation_model->wonder_correct(), 'nation_info' => $this->Nation_model->get_nation_by_id($this->session->userdata('nation_id')), 'wonder_date' => $wonder_date));
 			$this->load->view('assets/footer');
 		}
 		
@@ -184,8 +211,40 @@
 			
 			$this->load->view('assets/header', array('user' => $this->User_model->get_user_by_id($this->session->userdata('user_id'))));
 			$this->load->view('assets/sidebar');
-			$this->load->view('nation/wonder', array('wonder_info' => $this->Nation_model->get_wonder_by_id($wonder_id)));
+			$this->load->view('nation/wonder', array('nation_info' => $this->Nation_model->get_nation_by_id($this->session->userdata('nation_id')), 'wonder_info' => $this->Nation_model->get_wonder_by_id($wonder_id), 'wonder_quantity' => $this->Nation_model->check_wonder($wonder_id)));
 			$this->load->view('assets/footer');
+		}
+		
+		function purchase_wonder()
+		{
+			$wonder_id = $this->input->get('id');
+			$this->Nation_model->nation_purchase_wonder($wonder_id);
+		}
+		
+		// Improvements
+		
+		function improvements()
+		{
+			$this->load->view('assets/header', array('user' => $this->User_model->get_user_by_id($this->session->userdata('user_id'))));
+			$this->load->view('assets/sidebar');
+			$this->load->view('nation/improvements', array('improvement_info' => $this->Nation_model->get_improvements()));
+			$this->load->view('assets/footer');
+		}
+		
+		function improvement()
+		{
+			$improvement_id = $this->input->get('id');
+			
+			$this->load->view('assets/header', array('user' => $this->User_model->get_user_by_id($this->session->userdata('user_id'))));
+			$this->load->view('assets/sidebar');
+			$this->load->view('nation/improvement', array('improvement_info' => $this->Nation_model->get_improvement_by_id($improvement_id), 'nation_info' => $this->Nation_model->get_nation_by_id($this->session->userdata('nation_id')), 'improvement_quantity' => $this->Nation_model->check_improvement_quantity($improvement_id)));
+			$this->load->view('assets/footer');
+		}
+		
+		function purchase_improvement()
+		{
+			$improvement_id = $this->input->get('id');
+			$this->Nation_model->nation_purchase_improvement($improvement_id);
 		}
 		
 		function buy_infrastructure()
@@ -234,9 +293,10 @@
 		
 		function buy_planes()
 		{
-			$planes_purchase = $this->input->post('buy_planes');
-			$cost = $planes_purchase * 5;
-			$this->Nation_model->purchase_planes($cost, $planes_purchase);
+			$fighters_purchase = $this->input->post('buy_plane_fighter');
+			$bombers_purchase = $this->input->post('buy_plane_bomber');
+			$cost = ($bombers_purchase * 5) + ($fighters_purchase * 4);
+			$this->Nation_model->purchase_planes($cost, $fighters_purchase, $bombers_purchase);
 			$this->Nation_model->calculate_citizens();
 			redirect('inations/planes');
 		}
@@ -252,29 +312,58 @@
 		
 		function change_colour()
 		{
-			$colour = $this->input->post('radioColour');
-			$this->Nation_model->change_team_colour($colour);
+			
+			if($this->Nation_model->check_team()) {
+				$this->session->set_userdata('errormsg', 'You can only change taxes once a day.');			
+			}
+			
+			else {
+				$colour = $this->input->post('radioColour');
+				$this->Nation_model->change_team_colour($colour);
+			}
+			
 			redirect('Inations');
 		}
 		
 		function change_tax_rate()
 		{
 			$tax_rate = $this->input->post('tax_rate');
-			$this->Nation_model->change_tax_rate($tax_rate);
+			if($this->Nation_model->check_taxes()) {
+				$this->session->set_userdata('errormsg', 'You can only change taxes once a day.');			
+			}
+			
+			else {
+				$this->Nation_model->change_tax_rate($tax_rate);
+			}
+			
 			redirect('Inations');
 		}
 		
 		function change_government()
 		{
 			$government = $this->input->post('radioGovernment');
-			$this->Nation_model->change_government($government);
+			if($this->Nation_model->check_government()) {
+				$this->session->set_userdata('errormsg', 'You can only change government once a day.');				
+			}
+			
+			else {
+				$this->Nation_model->change_government($government);
+			}
+			
 			redirect('Inations');
 		}
 		
 		function change_religion()
 		{
 			$religion = $this->input->post('radioReligion');
-			$this->Nation_model->change_religion($religion);
+			if($this->Nation_model->check_religion()) {
+				$this->session->set_flashdata('errormsg', 'You can only change religion once a day.');	
+			}
+			
+			else {
+				$this->Nation_model->change_religion($religion);
+			}
+
 			redirect('Inations');
 		}
 		
@@ -291,29 +380,15 @@
 			$resource2 = $this->input->post('optionsResourcesTwo');
 			if ($resource1 == $resource2) {
 				$this->session->set_flashdata('errormsg', 'You must choose two seperate resources');
-				redirect('Inations/resources');
+			}
+			elseif ($this->Nation_model->check_resources) {
+				$this->session->set_flashdata('errormsg', 'You can only change resources once a day');
 			}
 			else {
 				$this->Nation_model->change_resources($resource1, $resource2);
-				redirect('Inations');
 			}
-		}
-		
-		function generate_resources()
-		{
-			/*switch ($page)
-				{
-					case "Home": echo "You selected Home";
-						break;
-					case "About": echo "You selected About";
-						break;
-					case "News": echo "You selected News";
-						break;
-					case "Login": echo "You selected Login"; 
-						break;
-					case "Links": echo "You selected Links"; 
-						break;
-				}*/
+			
+			redirect('Inations');
 		}
 		
 		/* Statistics */
@@ -349,6 +424,23 @@
 			$this->load->view('assets/header', array('user' => $this->User_model->get_user_by_id($this->session->userdata('user_id'))));
 			$this->load->view('assets/sidebar');
 			$this->load->view('alliance/alliance_totals', array('nation_info' => $this->Nation_model->get_nation_by_id($this->session->userdata('nation_id')), 'alliance_stats' => $this->Nation_model->get_statistic_totals($alliance)));
+			$this->load->view('assets/footer');
+		}
+		
+		function send_foreign_aid()
+		{
+			$nation_reciever_id = $this->input->get('id');
+			$foreign_aid->funds = $this->input->post('aid_funds');	
+			$foreign_aid->tech = $this->input->post('aid_tech');	
+			$foreign_aid->soldiers = $this->input->post('aid_soldiers');
+			$this->Nation_model->foreign_aid($nation_reciever_id, $foreign_aid);	
+		}
+		
+		function foreign_aid()
+		{
+			$this->load->view('assets/header', array('user' => $this->User_model->get_user_by_id($this->session->userdata('user_id'))));
+			$this->load->view('assets/sidebar');
+			$this->load->view('nation/foreign_aid', array('nation_info' => $this->Nation_model->get_nation_by_id($this->session->userdata('nation_id')), 'reciever_info' => $this->Nation_model->get_nation_by_id($this->input->get('id'))));
 			$this->load->view('assets/footer');
 		}
 	}

@@ -16,7 +16,7 @@
 				        	{
 				        		echo '<tr>';
 				        		echo '<td>' . $row->id . '</td>';
-				        		echo '<td>' . $row->nation_name . '</td>';
+				        		echo '<td><a href="' . site_url('inations/nation?id=' . $row->id) . '">' . $row->nation_name . '</a></td>';
 				        		echo '<td>' . $row->nation_ruler . '</td>';
 								echo '<td>' . $row->nation_infrastructure . '</td>';
 								echo '<td>' . $row->nation_technology . '</td>';
